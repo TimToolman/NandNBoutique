@@ -6,16 +6,7 @@
     <title>Clothing Gallery</title>
     <link href="default.css" rel="stylesheet" type="text/css" media="all" />
     <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <style>
-        .form-container {
-            display: flex;
-            align-items: center;
-        }
-        #product-image {
-            margin-left: 20px;
-            display: none;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -44,14 +35,41 @@
                 <label for="phone">Phone Number:</label>
                 <input type="tel" id="phone" name="phone" required><br><br>
 
-                <label for="SKU0001">SKU0001:</label>
+                <label for="SKU0001">Product:</label>
                 <select id="SKU0001" name="SKU0001" required style="width: 500px;" onchange="showProductImage()">
-                    <option value="" selected>Please select the item you are interested in purchasing</option>
+                    <option value="" selected>Please select the product you are interested in purchasing</option>
                     <option value="SKU0001">SKU0001</option>
                     <option value="SKU0002">SKU0002</option>
                     <option value="SKU0003">SKU0003</option>
                     <option value="SKU0004">SKU0004</option>
                     <option value="SKU0005">SKU0005</option>
+                </select><br><br>
+
+                <script>
+                    function showProductImage() {
+                        var product = document.getElementById('SKU0001').value;
+                        var img = document.getElementById('product-image');
+            
+                        if (product) {
+                            img.src = "images/" + product + ".jpg"; // Assuming the image files are located in the /images/ subfolder.
+                            img.style.display = "block";
+                        } else {
+                            img.style.display = "none";
+                        }
+                    }
+                </script>
+
+                <img id="product-image" src="" alt="Product Image">
+
+            </select><br><br>
+
+
+                <label for="size">Select Size:</label>
+                <select id="size" name="size" required style="width: 150px;>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                    <option value="xlarge">X-Large</option>
                 </select><br><br>
 
                 <label for="quantity">Quantity:</label>
@@ -65,22 +83,9 @@
 
                 <input type="submit" value="Submit">
             </form>
-        <img id="product-image" src="" alt="Product Image">
     </div>
 
-    <script>
-        function showProductImage() {
-            var product = document.getElementById('SKU0001').value;
-            var img = document.getElementById('product-image');
 
-            if (product) {
-                img.src = "images/" + product + ".jpg"; // Assuming the image files are located in the /images/ subfolder.
-                img.style.display = "block";
-            } else {
-                img.style.display = "none";
-            }
-        }
-    </script>
 </body>
 </html>
 
