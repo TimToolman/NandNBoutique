@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Gallery</title>
+    <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+    <style>
+        .item p {
+            text-align: left;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-wrapper">
+        <div id="header" class="container">
+            <div id="menu">
+                <ul>
+                    <li><a href="index.html" accesskey="1" title="">Home</a></li>
+                    <li class="current_page_item"><a href="catalog.html" accesskey="2" title="">Catalog</a></li> 
+                    <li><a href="order.html" accesskey="3" title="">Order Now</a></li> 
+                    <li><a href="faqs.html" accesskey="4" title="">FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="fancy-header">Sizes and quantities not guaranteed. We will confirm your order via phone and email before shipping.</h1>
+    <div class="gallery_body" id="gallery_body">
+        <!-- Items will be dynamically loaded here -->
+    </div>
+    
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content" id="modal-content">
+            <img id="modal-img" src="">
+        </div>
+    </div>
+
+    <script>
+        function openModal(src) {
+            document.getElementById('myModal').style.display = "block";
+            document.getElementById('modal-img').src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Function to load CSV and update the gallery
+        function loadCSVData() {
+            fetch('csv/sizes_quantities.csv')
+                .then(response => response.text())
+                .then(data => {
+                    const rows = data.split('\n').slice(1); // Skip the header row
+                    const gallery = document.getElementById('gallery_body');
+                    gallery.innerHTML = ''; // Clear existing content
+                    
+                    rows.forEach(row => {
+                        const cols = row.split(',');
+                        const sku = cols[0];
+                        const productName = cols[1];
+                        const sizesAndQuantities = cols[2].split(';');
+
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'item';
+                        itemDiv.innerHTML = `
+                            <img src="images/${sku}.jpg" alt="${sku}" onclick="openModal('images/${sku}.jpg')">
+                            <p><b>Product Name:</b> ${productName}<br><b>Sizes and Quantities:</b></p>
+                        `;
+                        
+                        sizesAndQuantities.forEach(sizeQuantity => {
+                            itemDiv.innerHTML += `<p>${sizeQuantity}</p>`;
+                        });
+                        
+                        gallery.appendChild(itemDiv);
+                    });
+                });
+        }
+
+        // Load CSV data when the page loads
+        window.onload = loadCSVData;
+    </script>
+</body>
+</html>

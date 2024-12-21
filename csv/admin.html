@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inventory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        form input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        form button,
+        .add-row-button {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover,
+        .add-row-button:hover {
+            background-color: #0056b3;
+        }
+
+        .add-row-button {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .actions button {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Product Inventory</h1>
+    <table id="productTable">
+        <thead>
+            <tr>
+                <th>SKU</th>
+                <th>Product Name</th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+                <th>XL</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody> <!-- Dynamic content will be inserted here --> </tbody>
+    </table>
+    <h2>Add New Product</h2>
+    <form id="productForm" onsubmit="saveProduct(event)"> <label for="sku">SKU:</label> <input type="text" id="sku"
+            name="sku" required> <label for="productName">Product Name:</label> <input type="text" id="productName"
+            name="productName" required> <label for="sizesAndQuantities">Sizes and Quantities:</label> <input
+            type="text" id="sizesAndQuantities" name="sizesAndQuantities" required> <button type="submit">Save
+            Product</button> <input type="hidden" id="productIndex"> </form> 
+    <script> let products = [{ SKU: 'SKU0001', ProductName: 'T-Shirt', SizesAndQuantities: 'S(3);M(2);L(4);XL(1)' }, { SKU: 'SKU0002', ProductName: 'Hoodie', SizesAndQuantities: 'S(1);M(1);L(2);XL(1)' }]; function parseSizesAndQuantities(sizesAndQuantities) { const sizes = { S: 0, M: 0, L: 0, XL: 0 }; sizesAndQuantities.split(';').forEach(pair => { const [size, quantity] = pair.match(/([A-Za-z]+)\((\d+)\)/).slice(1); sizes[size] = quantity; }); return sizes; } function loadProducts() { const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0]; tableBody.innerHTML = ''; products.forEach((product, index) => { const sizes = parseSizesAndQuantities(product.SizesAndQuantities); const row = tableBody.insertRow(); row.insertCell(0).innerHTML = product.SKU; row.insertCell(1).innerHTML = product.ProductName; row.insertCell(2).innerHTML = sizes.S; row.insertCell(3).innerHTML = sizes.M; row.insertCell(4).innerHTML = sizes.L; row.insertCell(5).innerHTML = sizes.XL; row.insertCell(6).innerHTML = `<div class="actions"><button onclick="editProduct(${index})">Edit</button> <button onclick="deleteProduct(${index})">Delete</button></div>`; }); } function saveProduct(event) { event.preventDefault(); const index = document.getElementById('productIndex').value; const sku = document.getElementById('sku').value; const productName = document.getElementById('productName').value; const sizesAndQuantities = document.getElementById('sizesAndQuantities').value; if (index !== '') { products[index] = { SKU: sku, ProductName: productName, SizesAndQuantities: sizesAndQuantities }; } else { products.push({ SKU: sku, ProductName: productName, SizesAndQuantities: sizesAndQuantities }); } document.getElementById('productForm').reset(); document.getElementById('productIndex').value = ''; loadProducts(); } function addProduct() { document.getElementById('productForm').reset(); document.getElementById('productIndex').value = ''; } function editProduct(index) { const product = products[index]; const sizes = parseSizesAndQuantities(product.SizesAndQuantities); document.getElementById('sku').value = product.SKU; document.getElementById('productName').value = product.ProductName; document.getElementById('productIndex').value = index; const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0]; const row = tableBody.rows[index]; row.cells[2].innerHTML = `<input type="text" id="editS" value="${sizes.S}" placeholder="S">`; row.cells[3].innerHTML = `<input type="text" id="editM" value="${sizes.M}" placeholder="M">`; row.cells[4].innerHTML = `<input type="text" id="editL" value="${sizes.L}" placeholder="L">`; row.cells[5].innerHTML = `<input type="text" id="editXL" value="${sizes.XL}" placeholder="XL">`; row.cells[6].innerHTML = `<button onclick="saveEditedProduct(${index})">Save</button>`; } function saveEditedProduct(index) { const sku = document.getElementById('sku').value; const productName = document.getElementById('productName').value; const s = document.getElementById('editS').value; const m = document.getElementById('editM').value; const l = document.getElementById('editL').value; const xl = document.getElementById('editXL').value; const sizesAndQuantities = `S(${s});M(${m});L(${l});XL(${xl})`; products[index] = { SKU: sku, ProductName: productName, SizesAndQuantities: sizesAndQuantities }; document.getElementById('productForm').reset(); document.getElementById('productIndex').value = ''; loadProducts(); } function deleteProduct(index) { products.splice(index, 1); loadProducts(); }
+
+        function addNewRow() {
+            const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+            const row = tableBody.insertRow();
+            row.insertCell(0).innerHTML = '<input type="text" id="newSKU" placeholder="SKU">';
+            row.insertCell(1).innerHTML = '<input type="text" id="newProductName" placeholder="Product Name">';
+            row.insertCell(2).innerHTML = '<input type="text" id="newS" placeholder="S">';
+            row.insertCell(3).innerHTML = '<input type="text" id="newM" placeholder="M">';
+            row.insertCell(4).innerHTML = '<input type="text" id="newL" placeholder="L">';
+            row.insertCell(5).innerHTML = '<input type="text" id="newXL" placeholder="XL">';
+            row.insertCell(6).innerHTML = '<button onclick="saveNewRow()">Save</button>';
+        }
+
+        function saveNewRow() {
+            const newSKU = document.getElementById('newSKU').value;
+            const newProductName = document.getElementById('newProductName').value;
+            const newS = document.getElementById('newS').value;
+            const newM = document.getElementById('newM').value;
+            const newL = document.getElementById('newL').value;
+            const newXL = document.getElementById('newXL').value;
+            const sizesAndQuantities = `S(${newS});M(${newM});L(${newL});XL(${newXL})`;
+            products.push({ SKU: newSKU, ProductName: newProductName, SizesAndQuantities: sizesAndQuantities });
+            loadProducts();
+        }
+
+        window.onload = loadProducts;
+    </script>
+</body>
+
+</html>

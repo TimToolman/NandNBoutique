@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Gallery</title>
+    <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+    <style>
+        .form-container {
+            display: flex;
+            align-items: center;
+        }
+        #product-image {
+            margin-left: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header-wrapper">
+        <div id="header" class="container">
+            <div id="menu">
+                <ul>
+                    <li><a href="index.html" accesskey="1" title="">Home</a></li>
+                    <li><a href="catalog.html" accesskey="2" title="">Catalog</a></li>
+                    <li class="current_page_item"><a href="order.html" accesskey="3" title="">Order Now</a></li>
+                    <li><a href="faqs.html" accesskey="4" title="">FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h3>Order Information</h3>
+    <div class="form-container">
+            <form action="process_form.php" method="post" style="margin-left: 40px;">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required><br><br>
+
+                <label for="SKU0001">SKU0001:</label>
+                <select id="SKU0001" name="SKU0001" required style="width: 500px;" onchange="showProductImage()">
+                    <option value="" selected>Please select the item you are interested in purchasing</option>
+                    <option value="SKU0001">SKU0001</option>
+                    <option value="SKU0002">SKU0002</option>
+                    <option value="SKU0003">SKU0003</option>
+                    <option value="SKU0004">SKU0004</option>
+                    <option value="SKU0005">SKU0005</option>
+                </select><br><br>
+
+                <label for="quantity">Quantity:</label>
+                <select id="quantity" name="quantity" required style="width: 60px;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select><br><br>
+
+                <input type="submit" value="Submit">
+            </form>
+        <img id="product-image" src="" alt="Product Image">
+    </div>
+
+    <script>
+        function showProductImage() {
+            var product = document.getElementById('SKU0001').value;
+            var img = document.getElementById('product-image');
+
+            if (product) {
+                img.src = "images/" + product + ".jpg"; // Assuming the image files are located in the /images/ subfolder.
+                img.style.display = "block";
+            } else {
+                img.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
+
