@@ -90,12 +90,14 @@
                     `;
                     document.body.appendChild(confirmation);
                 }
+                function sendOrder() {
+                    document.querySelector('form').submit();
+                    
+                    
+                }
                 function closeConfirmation() {
                     var confirmation = document.querySelector('div[style*="fixed"]');
                     document.body.removeChild(confirmation);
-                }
-                function sendOrder() {
-                    document.querySelector('form').submit();
                 }
             </script>
             <img id="product-image" src="" alt="Product Image"><br><br>
