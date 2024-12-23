@@ -378,7 +378,7 @@ html, body
 	
 	#menu li a, #menu li span
 	{
-		display: inline-block;
+		display: inline-flex;
 		padding: 1.3em 1.5em;
 		text-decoration: none;
 		font-size: 0.90em;
@@ -895,10 +895,10 @@ html, body
 }
 .form-container input, .form-container select, .form-container button {
     width: 100%;
-    max-width: 500px;
+    max-width:450px;
     padding: 10px;
     margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;

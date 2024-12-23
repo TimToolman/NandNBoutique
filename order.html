@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clothing Gallery</title>
+    <title>Order Now - Nonna and Nana's Boutique</title>
     <link href="default.css" rel="stylesheet" type="text/css" media="all" />
     <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
 </head>
@@ -30,8 +30,8 @@
             <label for="phone">Phone Number:</label>
             <input type="tel" id="phone" name="phone" required><br><br>
             <label for="SKU0001">Product:</label>
-            <select id="SKU0001" name="SKU0001" required style="width: 500px;" onchange="showProductImage()">
-                <option value="" selected>Please select the product you are interested in purchasing</option>
+            <select id="SKU0001" name="SKU0001" required style="width: 350px;" onchange="showProductImage()">
+                <option value="" selected>Select Product</option>
                 <option value="SKU0001">SKU0001</option>
                 <option value="SKU0002">SKU0002</option>
                 <option value="SKU0003">SKU0003</option>
@@ -95,8 +95,12 @@
                     document.body.removeChild(confirmation);
                 }
                 function sendOrder() {
-                    document.querySelector('form').submit();
-                    window.location.href = 'catalog.html';
+                    var form = document.querySelector('form');
+                    form.submit();
+                    form.addEventListener('submit', function() {
+                        window.location.href = 'catalog.html';
+                    });
+                    setTimeout(closeConfirmation, 3000);
                 }
             </script>
             <img id="product-image" src="" alt="Product Image"><br><br>
