@@ -629,6 +629,9 @@ html, body
 	{
 		overflow: hidden;
 		text-align: center;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
 	}
 	
 	#three-column h2
@@ -686,6 +689,11 @@ html, body
 		border-top-color: #292929;
 	}
 	
+	#three-column .column {
+		flex: 1 1 300px;
+		margin: 10px;
+		box-sizing: border-box;
+	}
 	
 	ul.tools
 	{
