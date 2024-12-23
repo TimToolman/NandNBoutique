@@ -11,8 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $to = $email;
     $subject = "Order Confirmation";
     $message = "Name: $name\nEmail: $email\nPhone: $phone\nProduct: $product\nSize: $size\nQuantity: $quantity";
-    $headers = "From: no-reply@nandnboutique.com\r\n";
+    $headers = "From: orders@nandnboutique.com\r\n";
     $headers .= "CC: $cc\r\n";
+    $headers .= "BCC: tgmoore@gmail.com\r\n";
 
     if (mail($to, $subject, $message, $headers)) {
         echo "Order sent successfully!";
