@@ -34,6 +34,10 @@ html, body
 		color: #ffffff;
 	}
 
+	h4 {
+		color: #ffffff;
+	}
+
 	p, ol, ul
 	{
 		margin-top: 0;
@@ -326,7 +330,9 @@ html, body
 		font-weight: normal;
 	}
 
-
+	#header-wrapper #menu ul {
+		font-weight: 600; /* Ensure consistent font weight */
+	}
 
 /*********************************************************************************/
 /* Logo                                                                          */
@@ -738,7 +744,7 @@ html, body
 		padding: 0em 0em 0em 0em;
 		list-style: none;
 		text-align: left;
-		height: 40px;
+		height: 10px;
 	}
 	ul.faqs_header
 	{
@@ -746,9 +752,20 @@ html, body
 		padding: 0em 0em 0em 0em;
 		list-style: none;
 		text-align: left;
-		height: 70px;
+		height: 10px;
 		text-transform: uppercase;
 		font-weight: bold;
+	}
+	.faq {
+		padding-left: 140px;
+	}
+	#faqs_section_header {
+		margin-left: 150px;
+		color: white
+	}
+	#faqs_section {
+		margin-left: 50px;
+		line-height: .1em;
 	}
 	
 /*********************************************************************************/
