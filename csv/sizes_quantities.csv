@@ -1,19 +1,19 @@
-SKU,ProductName,SizesAndQuantities
-SKU0001,T-Shirt,S(3);M(2);L(4);XL(1)
-SKU0002,Hoodie,S(1);M(1);L(2);XL(1)
-SKU0003,Jeans,S(1);M(1);L(2);XL(1)
-SKU0004,Jacket,S(1);M(2);L(2);XL(2)
-SKU0005,Cap,S(1);M(2);L(2);XL(2)
-SKU0006,Cap,S(1);M(2);L(2);XL(2)
-SKU0007,Cap,S(1);M(2);L(2);XL(2)
-SKU0008,Cap,S(1);M(2);L(2);XL(2)
-SKU0009,Cap,S(1);M(2);L(2);XL(2)
-SKU0010,Cap,S(1);M(2);L(2);XL(2)
-SKU0011,Cap,S(1);M(2);L(2);XL(2)
-SKU0012,Cap,S(1);M(2);L(2);XL(2)
-SKU0013,Cap,S(1);M(2);L(2);XL(2)
-SKU0014,Cap,S(1);M(2);L(2);XL(2)
-SKU0015,Cap,S(1);M(2);L(2);XL(2)
-SKU0016,Cap,S(1);M(2);L(2);XL(2)
-SKU0017,Cap,S(1);M(2);L(2);XL(2)
-SKU0018,Cap,S(1);M(2);L(2);XL(2)
+SKU,ProductName
+SKU0001,Mardi Gras Polka Dot Dress
+SKU0002,Ruffled Bunny Bubble
+SKU0003,Seersucker Bunny Jon Jon
+SKU0004,Mardi Gras Mask Dress
+SKU0005,Mardi Gras Stripped Dress
+SKU0006,Mardi Gras Scene Dress
+SKU0007,Mardi Gras Mask Bubble
+SKU0008,Pink Cross Dress
+SKU0009,Blue Cross Bubble
+SKU0010,Bunny Dress
+SKU0011,Bunny Bubble
+SKU0012,Scalloped Dress
+SKU0013,Pink Scalloped Bubble
+SKU0014,Seersucker Bunny Bubble
+SKU0015,Neutral Cross Dress
+SKU0016,Neutral Cross Boy Bubble
+SKU0017,Neutral Cross Girl Bubble
+SKU0018,Two-tone Seersucker Bunny Jon Jon
