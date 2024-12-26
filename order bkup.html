@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Gallery</title>
+    <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+    <div id="header-wrapper">
+        <div id="header" class="container">
+            <div id="menu">
+                <ul>
+                    <li><a href="index.html" accesskey="1" title="">Home</a></li>
+                    <li><a href="catalog.html" accesskey="2" title="">Catalog</a></li>
+                    <li class="current_page_item"><a href="order.html" accesskey="3" title="">Order Now</a></li>
+                    <li><a href="faqs.html" accesskey="4" title="">FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <h3>Order Information</h3>
+    <div class="form-container">
+        <form action="https://formspree.io/f/mdkkozea" method="post" style="margin-left: 40px;" onsubmit="confirmSubmission(event)">            
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required><br><br>
+            <label for="SKU0001">Product:</label>
+            <select id="SKU0001" name="SKU0001" required style="width: 500px;" onchange="showProductImage()">
+                <option value="" selected>Please select product of interest</option>
+                <option value="SKU0001">SKU0001</option>
+                <option value="SKU0002">SKU0002</option>
+                <option value="SKU0003">SKU0003</option>
+                <option value="SKU0004">SKU0004</option>
+                <option value="SKU0005">SKU0005</option>
+            </select><br><br>
+            <script>
+                function showProductImage() {
+                    var product = document.getElementById('SKU0001').value;
+                    var img = document.getElementById('product-image');
+                    if (product) {
+                        img.src = "images/" + product + ".jpg";
+                        img.style.display = "block";
+                    } else {
+                        img.style.display = "none";
+                    }
+                }
+                window.onload = function() {
+                    document.getElementById('product-image').style.display = 'none';
+                }
+                function confirmSubmission(event) {
+                    event.preventDefault();
+                    var name = document.getElementById('name').value;
+                    var email = document.getElementById('email').value;
+                    var phone = document.getElementById('phone').value;
+                    var product = document.getElementById('SKU0001').value;
+                    var size = document.getElementById('size').value;
+                    var quantity = document.getElementById('quantity').value;
+
+                    var confirmation = document.createElement('div');
+                    confirmation.style.position = 'fixed';
+                    confirmation.style.top = '50%';
+                    confirmation.style.left = '50%';
+                    confirmation.style.transform = 'translate(-50%, -50%)';
+                    confirmation.style.backgroundColor = '#f9f9f9';
+                    confirmation.style.padding = '40px';
+                    confirmation.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+                    confirmation.style.width = '400px';
+                    confirmation.style.height = 'auto';
+                    confirmation.style.fontFamily = 'Arial, sans-serif';
+                    confirmation.style.color = '#333';
+                    confirmation.innerHTML = `
+                        <img src="images/logo.png" alt="Logo" style="display: block; margin: 0 auto 20px auto; width: 200px; height: 150px;">
+                        <p style="font-size: 18px; font-weight: bold;">Make sure this is correct</p>
+                        <p>Name: ${name}</p>
+                        <p>Email: ${email}</p>
+                        <p>Phone: ${phone}</p>
+                        <p>Product: ${product}</p>
+                        <p>Size: ${size}</p>
+                        <p>Quantity: ${quantity}</p>
+                        <hr style="margin-top: 20px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                            <button onclick="closeConfirmation()" style="background-color: #ccc; border: none; padding: 10px 20px; cursor: pointer;">Return to Order Form</button>
+                            <button onclick="sendOrder()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; cursor: pointer;">Send Order</button>
+                        </div>
+                    `;
+                    document.body.appendChild(confirmation);
+                }
+                function sendOrder() {
+                    document.querySelector('form').submit();
+                    
+                    
+                }
+                function closeConfirmation() {
+                    var confirmation = document.querySelector('div[style*="fixed"]');
+                    document.body.removeChild(confirmation);
+                }
+            </script>
+            <img id="product-image" src="" alt="Product Image"><br><br>
+            <label for="size">Select Size:</label>
+            <select id="size" name="size" required style="width: 150px;">
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+                <option value="xlarge">X-Large</option>
+            </select><br><br>
+            <label for="quantity">Quantity:</label>
+            <select id="quantity" name="quantity" required style="width: 60px;">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select><br><br>
+            <input type="submit" value="Review Order">
+        </form>
+    </div>
+</body>
+</html>
+
